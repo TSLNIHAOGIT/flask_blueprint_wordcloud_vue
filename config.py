@@ -16,6 +16,6 @@ SQLALCHEMY_DATABASE_URI = 'mysql://' + MYSQL_USER + ':' + MYSQL_PASS + '@' \
 
 # host IP port
 # APP_HOST = 'localhost'
-APP_PORT = 18401
+APP_PORT = 18402
 
 

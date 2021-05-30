@@ -15,7 +15,7 @@ import math
 import traceback
 from datetime import  datetime
 import json
-
+from flask_restful import Resource, Api
 
 
 
@@ -48,13 +48,13 @@ def get_wordcloud():
         logger.error('出错：{}\n{}'.format(e, traceback.format_exc()))
 
         return jsonify({'data': None, 'code': "1", 'message': "{}".format(e)})
-    finally:
-      res_json_path=os.path.abspath(os.path.join(os.path.dirname(__file__),'../../log'))
-
-      with open(os.path.join(res_json_path,'{}_res_path.json'.format(now_time)),'w',encoding='utf8') as f:
-        data={
-
-            "calculateParam": content,
-            "calculateResult": {'data':res}
-        }
-        json.dump(data,f,indent=4,ensure_ascii=False)
+    # finally:
+    #   res_json_path=os.path.abspath(os.path.join(os.path.dirname(__file__),'../../log'))
+    #
+    #   with open(os.path.join(res_json_path,'{}_res_path.json'.format(now_time)),'w',encoding='utf8') as f:
+    #     data={
+    #
+    #         "calculateParam": content,
+    #         "calculateResult": {'data':res}
+    #     }
+    #     json.dump(data,f,indent=4,ensure_ascii=False)

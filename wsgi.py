@@ -11,10 +11,16 @@ sys.path.insert(0,root_path)
 from app_logging import logger_path as logger
 
 from app.wordcloud_example import  wordcloud as predict_score_blueprint
+##蓝图实例，在init文件中blueprint定义过的
+from app.restfulapi_wordcloud_example import  restful_wordcloud as restful_wordcloud_blueprint
 
 
 import warnings
 warnings.filterwarnings('ignore')
+
+##仅仅为了测试一下flask-restfult api
+from flask_restful import Resource, Api
+from app.restfulapi_wordcloud_example.views import HelloWorld
 
 
 # app = Flask(__name__, static_url_path='')
@@ -22,6 +28,13 @@ warnings.filterwarnings('ignore')
 app = Flask(__name__,
             template_folder="dist",
             static_folder="dist/static")
+
+
+
+#####这样感觉还是用原生的通过装饰符自己编写的好用，前后端分离，路由跳转等全部由前端控制，只留一个主页面地址
+api = Api(app)
+api.add_resource(HelloWorld, '/restful')
+
 
 
 
@@ -40,13 +53,20 @@ CORS(app, supports_credentials=True)
 #     return "APIs Server"
 
 # 主页面
+
+###意思是两个路由/或者/index都是指向同一个页面
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html')
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
 
 app.register_blueprint(predict_score_blueprint)#, url_prefix=url_prefix)
+app.register_blueprint(restful_wordcloud_blueprint)
 
 
 if __name__ == '__main__':
