@@ -31,7 +31,7 @@ app = Flask(__name__,
 
 
 
-#####这样感觉还是用原生的通过装饰符自己编写的好用，前后端分离，路由跳转等全部由前端控制，只留一个主页面地址
+
 api = Api(app)
 api.add_resource(HelloWorld, '/restful')
 
